@@ -21,27 +21,42 @@ public class Vara {
 	public int taPris() {
 		return this.pris;
 	}
-	
+
 	@Override
-	public boolean equals(Object other){
-		if (other == null){
-	    	return false;
-		}else if(other instanceof Vara){
-			if((((Vara) other).taNamn() == this.taNamn())&&(((Vara) other).taPris() == this.taPris())){
-				return true;
-			}
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((namn == null) ? 0 : namn.hashCode());
+		result = prime * result + pris;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
 		}
-		return false;	
-	    
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Vara)) {
+			return false;
+		}
+		Vara other = (Vara) obj;
+		if (namn == null) {
+			if (other.namn != null) {
+				return false;
+			}
+		} else if (!namn.equals(other.namn)) {
+			return false;
+		}
+		if (pris != other.pris) {
+			return false;
+		}
+		return true;
 	}
 	
-	@Override
-    public int hashCode() {
-		int hash = 5;
-	    hash += this.taNamn().hashCode();
-        hash += this.taPris();
-        return hash;
-	    }
+
 
 
 	
