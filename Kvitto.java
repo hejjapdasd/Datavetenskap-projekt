@@ -4,7 +4,7 @@ import java.util.Map.Entry;
 
 public class Kvitto {
 	Map<Vara, Integer> varulist = new HashMap<>();
-//	Integer står för antalet av varje Vara
+//	Integer står för antalet av varje vara
 		
 	
 	public Kvitto(){
@@ -13,6 +13,10 @@ public class Kvitto {
 		}
 	
 	public void addVara(Vara v){
+		if(v==null){
+//			ska man skriva något här?
+			return;
+		}
 		if(varulist.containsKey(v)){
 			Integer nyttAntal = varulist.get(v)+1;
 			Vara newVara = v;
@@ -31,32 +35,28 @@ public class Kvitto {
 	}
 	
 	
+	public Integer getAntalAvVara(Vara v){
+		for (Entry<Vara, Integer> entry : varulist.entrySet()) {
+			   if(entry.getKey().equals(v)){
+				   return entry.getValue();
+			   }
+			}
+		return -1;
+//		om det inte finns några varor alls så återges det felaktiga värdet -1
+	}
 
 	public float summeraAllaVaror(){
 		float sum = 0;
-		for (Vara v : varulist.keySet()) {
-			   sum += v.getPris()*varulist.get(v);
-//			   			^^^^^^fixa fram nyckeln dvs. antalet av Varan
-			}
+		for (Entry<Vara, Integer> entry : varulist.entrySet()) {
+			   sum += entry.getKey().taPris()*entry.getValue();
+//				   lägg till Varans pris^multiplicerat ^med antalet av varan
+			   }
+		
 		return sum;
 	}
 	
 	
 		
-//	public void addVara(Vara v){
-//		for(int i;i< varulist.size(); i++){
-//			if(i.equals(v)){
-//				Integer nyttAntal = varulist.get(i)+1;
-//				varulist.remove(i);
-////				ta bort det gamla värdet
-//				varulist.put(v, nyttAntal);
-//			}else{
-//				varulist.put(v, 1);
-//			}
-//		}
-//		
-//		
-//	}
 	
 	public String toString(){
 		String s = "";
