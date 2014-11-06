@@ -1,0 +1,73 @@
+
+import static org.junit.Assert.*;
+
+import javax.imageio.IIOException;
+
+import org.junit.Before;
+import org.junit.Test;
+
+
+public class KvittoTest {
+	private Vara v1;
+	private Vara v2;
+	private Vara v3;
+	
+	private String s1;
+	
+	private Vara n1;
+	
+	@Before
+	public void setUp() throws Exception {
+		v1 = new Vara("fisk", 30);
+		v2 = new Vara("stek", 40);
+		v3 = new Vara("mjölk", 8);
+		
+		s1 = new String("HUAHUHA");
+		
+		n1 = null;
+		
+		
+	}
+
+	@Test
+	public void addVara1() {
+		Kvitto k = new Kvitto();
+		k.addVara(v1);
+		assertEquals (k.varulist.size(),1);
+		
+		
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void addVara2() {
+		Kvitto k = new Kvitto();
+//		k.addVara(s1);
+		assertEquals (k.varulist.size(),0);
+		
+	}
+	
+	@Test
+	public void addVara3() {
+		Kvitto k = new Kvitto();
+		k.addVara(n1);
+
+		assertEquals (k.varulist.size(),0);
+		
+	}
+	
+	@Test
+	public void addVara4() {
+		Kvitto k = new Kvitto();
+		k.addVara(v1);
+		k.addVara(v1);
+		int res = k.getAntalAvVara(v1);
+		assertEquals (res,2);
+			
+		
+	}
+	
+	
+	
+
+
+}
